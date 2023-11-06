@@ -41,6 +41,26 @@ class LottoTest {
     @Test
     void 금액이_숫자가_아닐_때_테스트(){
         String 금액값 = "ab12";
+        assertThatThrownBy(() ->
+                Validator.validateInputAmount(금액값))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 금액 입력시 숫자가 1000으로 나눠지지 않으면 예외가 발생한다.")
+    @Test
+    void 금액이_1000으로_나눠지지_않을_때_아닐_때_테스트(){
+        String 금액값 = "4500";
+        assertThatThrownBy(() ->
+                Validator.validateInputAmount(금액값))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 중복_번호_테스트(){
+        List<Integer> 중복된로또번호 = List.of(1,2,4,4,5,6);
+        assertThatThrownBy(() ->
+                Lotto.validateSameNumberCheckStart(중복된로또번호))
+                .isInstanceOf(IllegalArgumentException.class);
 
     }
 
