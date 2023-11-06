@@ -59,10 +59,41 @@ class LottoTest {
     void 중복_번호_테스트(){
         List<Integer> 중복된로또번호 = List.of(1,2,4,4,5,6);
         assertThatThrownBy(() ->
-                Lotto.validateSameNumberCheckStart(중복된로또번호))
+                Validator.validateSameNumberCheckStart(중복된로또번호))
                 .isInstanceOf(IllegalArgumentException.class);
-
     }
+    @Test
+    void 범위_초과_테스트(){
+        List<String> 범위초과리스트 = List.of("1","2","50","0","5","8");
+        assertThatThrownBy(() ->
+                Validator.validateLottoNumLimit(범위초과리스트))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 그릇된_형식_테스트(){
+        List<String> 형식에러리스트 = List.of("1","2","a","b","5","8");
+        assertThatThrownBy(() ->
+                Validator.validateLottoNumLimit(형식에러리스트))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 보너스숫자_범위_초과_테스트(){
+        String bonus = "0";
+        assertThatThrownBy(() ->
+                Validator.validateBonusNumLimit(bonus))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 보너스숫자_그릇된_형식_테스트(){
+        String bonus = "a";
+        assertThatThrownBy(() ->
+                Validator.validateBonusNumChange(bonus))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
 
 }
