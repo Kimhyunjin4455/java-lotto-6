@@ -126,12 +126,39 @@ class LottoTest {
 
         List<Integer> winningBalls = List.of(1,2,3,4,5,6);
         int bonusBall = 7;
-        compareValueStart(winningBalls, lottoBalls, bonusBall);
+        compareValueStart(winningBalls, lottoBalls, bonusBall,5000);
 
         Assertions.assertThat(Integer.toString(CompareLottoValue.getResultMoney())).isEqualTo("2031555000");
 
     }
 
+    @Test
+    void 총_수익률_계산(){
+        List<Integer> lottoBall1 = List.of(8, 21, 23, 41, 42, 43);
+        List<Integer> lottoBall2 = List.of(3, 5, 11, 16, 32, 38);
+        List<Integer> lottoBall3 = List.of(7, 11, 16, 35, 36, 44);
+        List<Integer> lottoBall4 = List.of(1, 8, 11, 31, 41, 42);
+        List<Integer> lottoBall5 = List.of(13, 14, 16, 38, 42, 45);
+        List<Integer> lottoBall6 = List.of(7, 11, 30, 40, 42, 43);
+        List<Integer> lottoBall7 = List.of(2, 13, 22, 32, 38, 45);
+        List<Integer> lottoBall8 = List.of(1, 3, 5, 14, 22, 45);
 
+        List<List<Integer>> lottoBalls2 = new ArrayList<>();
+        lottoBalls2.add(lottoBall1);
+        lottoBalls2.add(lottoBall2);
+        lottoBalls2.add(lottoBall3);
+        lottoBalls2.add(lottoBall4);
+        lottoBalls2.add(lottoBall5);
+        lottoBalls2.add(lottoBall6);
+        lottoBalls2.add(lottoBall7);
+        lottoBalls2.add(lottoBall8);
+
+        int amount = 8000;
+
+        List<Integer> winningBalls = List.of(1,2,3,4,5,6);
+        int bonusBall = 7;
+        compareValueStart(winningBalls, lottoBalls2, bonusBall,8000);
+        Assertions.assertThat((CompareLottoValue.getRateOfTurn(amount))).isEqualTo(62.5);
+    }
 
 }
